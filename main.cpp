@@ -17,7 +17,7 @@ string string_randomizer(string &str, int len_pass){
     for (int i= 0; i< len_pass; i++){
         loose_string = loose_string + str[rand()%len_pass];
     }
-std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     return loose_string;
 }
 
@@ -40,29 +40,17 @@ int main(){
             cout << "Minimum passowrd length requirement satisfied! Working magic now!"<< endl;
                 for (int j = 0; j< len_pass; j++){
                 // sampling various candidate characters for a passoword component
-        for (int i = 0; i <4 ; i++){
-            if (i == 0){
-                int num = rand()%10;
-                passwd += pass_token[i][num];
-            }
-            else if (i ==1){
-                int num = rand()%26;
-                passwd += pass_token[i][num];
-            }
-            else if (i ==1){
-                int num = rand()%26;
-                passwd += pass_token[i][num];
-            }
-            else {
-                int num = rand()%5;
-                passwd += pass_token[i][num];
-            }
-        }
-       
+                    for (int i = 0; i <4 ; i++){
+                        int num = rand()%pass_token[i].length();
+                        passwd += pass_token[i][num];
+                    }
     }
+    
+    //std::thread first ()
     std::thread second (print_stuff);
     passwd = string_randomizer(passwd, len_pass);
     
+
     // synchronize threads:
     //first.join();                // pauses until first finishes
     second.join();               // pauses until second finishes
